@@ -1,8 +1,33 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+  color: white;
+  
 }
 
-a {
-  color: #00B7FF;
+.pro{
+  display: flex;
+  flex-direction: column;
+}
+
+.cont{
+ justify-content: center;
+ display: flex;
+ flex-wrap: wrap ;
+ gap:1px;
+ 
+}
+.item{
+  
+  padding: 2px;
+  flex-basis: 200;
+  margin: 5px;
+  height: 50px;
+  width: 50px;
+  background-color: blue;
+  
+}
+
+@media screen and (max-width: 750px) {
+  tbody, thead { float: left; max-height: fit-content; }
+  thead { min-width: 120px }
+  td,th { display: block }
 }
