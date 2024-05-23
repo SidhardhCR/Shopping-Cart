@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars')
 var fileUpload = require('express-fileupload')
+var db = require('./config/db_connection')
 
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
@@ -22,6 +23,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
+db.connect((err) => {
+  if (err) {
+    console.log('Connection error')
+  }
+  else {
+    console.log('Database connected suceessfully')
+  }
+})
 
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
