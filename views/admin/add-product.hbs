@@ -1,0 +1,39 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Add Product</h1>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+            <form action="/admin/add-product" method="post" role="form" enctype="multipart/form-data">
+                <legend>Enter Product Information Here</legend>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" name="category" id="category" placeholder="Category">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="description"
+                        placeholder="Description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" name="image" id="image" placeholder="Image">
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
