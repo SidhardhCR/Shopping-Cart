@@ -1,4 +1,5 @@
 var db = require('../config/db_connection')
+var collection = require('../config/db_collections')
 
 var promise = require('promise')
 
@@ -11,5 +12,11 @@ module.exports = {
             })
         })
         )
+    },
+    getAllProducts: () => {
+        return new promise(async (resolve, reject) => {
+            let products = await db.get().collection(collection.Collection_Product).find().toArray()
+            resolve(products)
+        })
     }
 }
