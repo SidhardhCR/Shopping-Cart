@@ -12,12 +12,13 @@
                     <a class="nav-link active text-white" aria-current="page" href="/">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="">Cart</a>
+                    <a class="nav-link text-white" href="/cart">Cart</a>
                 </li>
-
+                {{#if user}}
                 <li class="nav-item">
-                    <a class="nav-link  text-white" href="">My Orders</a>
+                    <a class="nav-link  text-white" href="/">My Orders</a>
                 </li>
+                {{/if}}
 
             </ul>
             <div class="dropdown" style="margin-right: 60px;">

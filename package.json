@@ -17,6 +17,7 @@
     "http-errors": "~1.6.3",
     "mongodb": "^6.6.2",
     "morgan": "~1.9.1",
+    "nocache": "^4.0.0",
     "promise": "^8.3.0"
   }
 }
