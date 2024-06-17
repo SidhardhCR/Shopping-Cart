@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Edit Product</h1>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+            <form action="/admin/edit-product/{{details._id}}" method="post" role="form" enctype="multipart/form-data">
+                <legend>Enter Product Information Here</legend>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name"
+                        value='{{details.name}}'>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" name="category" id="category" placeholder="Category"
+                        value='{{details.category}}'>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="text" class="form-control" name="description" id="description"
+                        placeholder="Description">{{details.description}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="image" style="width: 100%;">Image</label>
+                    <img src="/product-images/{{details._id}}.jpg" alt="" id="imgView">
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" name="image" id="image" placeholder="Image"
+                        onchange='updateImg(event)'>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateImg(event) {
+        let img = document.getElementById('imgView')
+        img.src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

@@ -37,4 +37,22 @@ router.get('/delete-product/:id', (req, res) => {
   })
 })
 
+router.get('/edit-product/:id', (req, res) => {
+  console.log(req.params.id)
+  productHelper.getProductDetails(req.params.id).then((details) => {
+    res.render('admin/edit-product', { details })
+  })
+
+})
+router.post('/edit-product/:id', (req, res) => {
+  console.log(req.body)
+  productHelper.editProduct(req.params.id, req.body).then((response) => {
+    let image = req.files.image
+    image.mv('./public/product-images/' + req.params.id + '.jpg')
+    res.redirect("/admin")
+  })
+})
+
+
+
 module.exports = router;

@@ -3,10 +3,7 @@ body{
   
 }
 
-.pro{
-  display: flex;
-  flex-direction: column;
-}
+
 
 .cont{
  justify-content: center;
@@ -30,4 +27,28 @@ body{
   tbody, thead { float: left; max-height: fit-content; }
   thead { min-width: 120px }
   td,th { display: block }
+}
+
+.child{
+  height: 100px;
+  width: 100px;
+  background-color: blue;
+  margin: 10px;
+  color: white;
+  text-align: center;
+  
+}
+
+.parent{
+  float: right;
+  margin: 10px;
+  padding: 10px;
+}
+.cart-item-count{
+  background-color: lightsteelblue;
+  border-radius: 3px;
+  color: white;
+  border: none;
+  width: 25px;
+  margin: 2px;
 }

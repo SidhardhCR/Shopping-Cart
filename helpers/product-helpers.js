@@ -31,5 +31,20 @@ module.exports = {
             })
 
         })
+    },
+    getProductDetails: (proId) => {
+        return new promise((resolve, reject) => {
+            db.get().collection(collection.Collection_Product).findOne({ _id: new objectId(proId) }).then((response) => {
+                resolve(response)
+            })
+        })
+    },
+    editProduct: (proId, product) => {
+        return new promise((resolve, reject) => {
+            db.get().collection(collection.Collection_Product).updateOne({ _id: new objectId(proId) }, { $set: { name: product.name, category: product.category, description: product.description } }).then((response) => {
+                console.log(response)
+                resolve(response)
+            })
+        })
     }
 }
