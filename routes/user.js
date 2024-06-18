@@ -13,11 +13,16 @@ var verifyLogin = (req, res, next) => {
   }
 }
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
   let user = req.session.user
+  let count
+  if (user) {
+    count = await userhelpers.getCount(req.session.user._id)
+    console.log(count)
+  }
   console.log(user)
   productHelper.getAllProducts().then((products) => {
-    res.render('user/index', { products, admin: false, user });
+    res.render('user/index', { products, admin: false, user, count });
 
   })
 
@@ -79,8 +84,11 @@ router.get('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/cart', verifyLogin, (req, res) => {
+router.get('/cart', verifyLogin, async (req, res) => {
+
   let user = req.session.user
+
+
   userhelpers.getCartProducts(req.session.user._id).then((cartProducts) => {
     res.render('user/cart', { user, cartProducts });
   })
@@ -88,8 +96,10 @@ router.get('/cart', verifyLogin, (req, res) => {
 })
 
 router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
+  console.log('api call')
+
   userhelpers.addToCart(req.params.id, req.session.user._id).then((response) => {
-    res.redirect('/cart')
+    res.json({ status: true })
   })
 
 })
