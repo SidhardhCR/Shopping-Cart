@@ -74,7 +74,7 @@ module.exports = {
                 if (UserCart) {
                     db.get().collection(collection.Collection_Cart).findOne({ 'product.item': new ObjectId(proId) }).then((proExist) => {
                         if (proExist) {
-                            db.get().collection(collection.Collection_Cart).updateOne({ 'product.item': new ObjectId(proId) }, {
+                            db.get().collection(collection.Collection_Cart).updateOne({ 'product.item': new ObjectId(proId), user: new ObjectId(userId) }, {
                                 $inc: { 'product.$.quantity': 1 }
                             }).then((response) => {
                                 console.log(response)
@@ -132,6 +132,15 @@ module.exports = {
                         foreignField: '_id',
                         as: 'result'
                     }
+                },
+                {
+                    $project: {
+                        item: 1,
+                        quantity: 1,
+                        result: {
+                            $arrayElemAt: ["$result", 0]
+                        }
+                    }
                 }
             ]).toArray()
             console.log(cartItems)
@@ -160,6 +169,60 @@ module.exports = {
             else {
                 resolve(count)
             }
+        })
+    },
+    changeQuantity: (details) => {
+        details.count = parseInt(details.count)
+        return new promise((resolve, reject) => {
+            db.get().collection(collection.Collection_Cart).findOne({ _id: new ObjectId(details.cart) }).then((UserCart) => {
+
+                if (UserCart) {
+                    db.get().collection(collection.Collection_Cart).findOne({ 'product.item': new ObjectId(details.product) }).then((proExist) => {
+
+                        if (proExist) {
+                            db.get().collection(collection.Collection_Cart).updateOne({ 'product.item': new ObjectId(details.product), _id: new ObjectId(details.cart) }, {
+                                $inc: { 'product.$.quantity': details.count }
+                            }).then((response) => {
+
+                                let quantity = db.get().collection(collection.Collection_Cart).aggregate([
+                                    {
+                                        $match: {
+                                            _id: new ObjectId(details.cart)
+                                        }
+                                    },
+                                    {
+                                        $unwind: {
+                                            path: "$product"
+                                        }
+                                    },
+                                    {
+                                        $project: {
+                                            item: "$product.item",
+                                            quantity: "$product.quantity"
+                                        }
+                                    },
+                                    {
+                                        $match: {
+                                            item: new ObjectId(details.product)
+                                        }
+                                    },
+                                    {
+                                        $project: {
+                                            quantity: 1
+                                        }
+                                    }
+                                ]).toArray()
+                                console.log(quantity)
+                                resolve(quantity)
+                            })
+                        }
+
+                    })
+
+
+
+                }
+            })
         })
     }
 }

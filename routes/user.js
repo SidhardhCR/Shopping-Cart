@@ -110,4 +110,12 @@ router.get('/remove-product/:id', (req, res) => {
     res.redirect('/cart')
   })
 })
+
+router.post('/change-quantity', (req, res) => {
+  console.log(req.body)
+  userhelpers.changeQuantity(req.body).then((response) => {
+    console.log(response)
+    res.json({ status: true, product: response })
+  })
+})
 module.exports = router;

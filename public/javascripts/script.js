@@ -13,3 +13,25 @@ addToCart = (proId) => {
         }
     })
 }
+
+changeQuantity = (cartId, proId, count) => {
+
+    $.ajax({
+        url: '/change-quantity',
+        data: {
+            cart: cartId,
+            product: proId,
+            count: count
+        },
+        method: 'post',
+        success: (response) => {
+            console.log(response.product[0].quantity)
+            let quantity = response.product[0].quantity
+            console.log(quantity)
+
+            $(`#proQuantity-${proId}`).html(parseInt(quantity))
+
+        }
+    })
+
+}

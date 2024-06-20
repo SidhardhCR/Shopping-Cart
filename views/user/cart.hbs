@@ -12,13 +12,20 @@
         <tbody>
             {{#each cartProducts}}
             <tr>
-                {{#each this.result}}
-                <td><img width="100px" , height="100px" src="/product-images/{{this._id}}.jpg" alt=""></td>
-                <td>{{this.name}}</td>
-                {{/each}}
-                <td><button class="cart-item-count ">-</button>{{this.quantity}}<button class="cart-item-count ">+</button></td>
-                <td><a href="" class="btn btn-danger"
-                        onclick="return confirm('Are you sure?')">Remove</a></td>
+
+                <td><img width="100px" , height="100px" src="/product-images/{{this.result._id}}.jpg" alt=""></td>
+                <td>{{this.result.name}}</td>
+
+                <td>
+                    <div class="cart-item-controls">
+                        <button class="cart-item-count"
+                            onclick="changeQuantity('{{this._id}}','{{this.result._id}}',-1)">-</button>
+                        <p id="proQuantity-{{this.result._id}}">{{quantity}}</p>
+                        <button class="cart-item-count"
+                            onclick="changeQuantity('{{this._id}}','{{this.result._id}}',+1)">+</button>
+                    </div>
+                </td>
+                <td><a href="" class="btn btn-danger" onclick="return confirm('Are you sure?')">Remove</a></td>
             </tr>
             {{/each}}
         </tbody>
