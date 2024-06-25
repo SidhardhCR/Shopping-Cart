@@ -52,7 +52,6 @@ router.post('/login', (req, res) => {
     if (response.status) {
       req.session.loggedIn = true
       req.session.user = response.user
-
       res.redirect('/')
     }
     else {
@@ -87,10 +86,10 @@ router.get('/logout', (req, res) => {
 router.get('/cart', verifyLogin, async (req, res) => {
 
   let user = req.session.user
-
-
+  console.log(user)
+  let totalValue = await userhelpers.getTotalAmount(user._id)
   userhelpers.getCartProducts(req.session.user._id).then((cartProducts) => {
-    res.render('user/cart', { user, cartProducts });
+    res.render('user/cart', { user: user, cartProducts, totalValue });
   })
 
 })
@@ -105,17 +104,26 @@ router.get('/add-to-cart/:id', verifyLogin, (req, res) => {
 })
 
 router.get('/remove-product/:id', (req, res) => {
-
+  
   userhelpers.deleteCartProduct(req.params.id, req.session.user._id).then((response) => {
     res.redirect('/cart')
   })
 })
 
 router.post('/change-quantity', (req, res) => {
-  console.log(req.body)
-  userhelpers.changeQuantity(req.body).then((response) => {
-    console.log(response)
-    res.json({ status: true, product: response })
+  
+  userhelpers.changeQuantity(req.body).then(async (response) => {
+    
+    let total = await userhelpers.getTotalAmount(req.body.user)
+    
+    res.json({ status: true, remove: response, total: total })
   })
+})
+
+router.get('/place-order', verifyLogin, async (req, res) => {
+  let user = req.session.user
+  let total = await userhelpers.getTotalAmount(req.session.user._id)
+  
+  res.render('user/place-order', { total, user })
 })
 module.exports = router;

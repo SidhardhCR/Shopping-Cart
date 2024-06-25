@@ -62,3 +62,75 @@ body{
   width: 25px;
   margin: 2px;
 }
+
+.container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.place-order {
+  display: flex;
+  flex-direction: column;
+}
+
+.address, .payment {
+  margin-bottom: 20px;
+}
+
+.address h2, .payment h5 {
+  margin-bottom: 20px;
+}
+
+.address label {
+  margin-top: 10px;
+  display: block;
+}
+
+.address input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.payment div {
+  margin-top: 10px;
+ 
+}
+.payment{
+  border: solid,1px;
+  padding: 5px;
+}
+
+.payment hr {
+  margin: 20px 0;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .place-order {
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+  .address, .payment {
+      width: 48%;
+  }
+
+  .btn {
+      width: auto;
+      float: right;
+  }
+}

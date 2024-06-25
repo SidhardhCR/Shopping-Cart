@@ -1,0 +1,36 @@
+<section>
+    <div class="container">
+        <form action="">
+            <div class="place-order">
+                <div class="address">
+                    <h2>Enter delivery address</h2>
+                    <label for="address">Address</label>
+                    <input type="text">
+                    <label for="pincode">Pincode</label>
+                    <input type="number">
+                    <label for="mobile">Mobile</label>
+                    <input type="number">
+                </div>
+
+                <div class="payment">
+                    <div>
+                        <h5>Total: ₹<span>{{total}}</span></h5>
+                        <hr>
+                    </div>
+                    <label for="payment-methods">Payment Method</label>
+                    <div class="mt-2 radio">
+                        <input type="radio" name="payment" id="cod">
+                        <label for="cod">COD</label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="payment" id="online-payment">
+                        <label for="online-payment">Online Payment</label>
+                    </div>
+                    <div>
+                        <a href="" class="btn btn-success mt-2">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

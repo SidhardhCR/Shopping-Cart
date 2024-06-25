@@ -14,22 +14,29 @@ addToCart = (proId) => {
     })
 }
 
-changeQuantity = (cartId, proId, count) => {
+changeQuantity = (cartId, proId, count, userId) => {
 
     $.ajax({
         url: '/change-quantity',
         data: {
             cart: cartId,
             product: proId,
-            count: count
+            count: count,
+            quantity: $(`#${proId}`).html(),
+            user: userId
         },
         method: 'post',
         success: (response) => {
-            console.log(response.product[0].quantity)
-            let quantity = response.product[0].quantity
-            console.log(quantity)
+            console.log(response)
+            if (response.remove) {
+                location.reload()
 
-            $(`#proQuantity-${proId}`).html(parseInt(quantity))
+            } else {
+                let newQuantity = parseInt($(`#${proId}`).html()) + count
+                $(`#${proId}`).html(newQuantity)
+                $('#total-value').html(response.total)
+            }
+
 
         }
     })
